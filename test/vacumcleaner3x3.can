@@ -1,0 +1,43 @@
+// Initial belief bases
+1. at_A1, A1_dirty, A2_clean, A3_clean, B1_dirty, B2_clean, B3_clean, C1_clean, C2_clean, C3_clean
+// External events
+init
+// Plan library
+init : true <- goal(A1_clean & A2_clean & A3_clean &B1_clean &B2_clean &B3_clean & C1_clean & C2_clean & C3_clean, clean, false).
+clean : at_A1 <- goal(A1_clean, vacum, false); move_to_A2.
+clean : at_A2 <- goal(A2_clean, vacum, false); move_to_A3.
+clean : at_A3 <- goal(A3_clean, vacum, false); move_to_B3.
+clean : at_B1 <- goal(B1_clean, vacum, false); move_to_C1.
+clean : at_B2 <- goal(B2_clean, vacum, false); move_to_B1.
+clean : at_B3 <- goal(B3_clean, vacum, false); move_to_B2.
+clean : at_C1 <- goal(C1_clean, vacum, false); move_to_C2.
+clean : at_C2 <- goal(C2_clean, vacum, false); move_to_C3.
+clean : at_C3 <- goal(C3_clean, vacum, false); move_to_A1.
+vacum : at_A1 & A1_dirty <- clean_A1.
+vacum : at_A2 & A2_dirty <- clean_A2.
+vacum : at_A3 & A3_dirty <- clean_A3.
+vacum : at_B1 & B1_dirty <- clean_B1.
+vacum : at_B2 & B2_dirty <- clean_B2.
+vacum : at_B3 & B3_dirty <- clean_B3.
+vacum : at_C1 & C1_dirty <- clean_C1.
+vacum : at_C2 & C2_dirty <- clean_C2.
+vacum : at_C3 & C3_dirty <- clean_C3.
+// Actions description
+clean_A1 : at_A1 & A1_dirty <- <{A1_dirty}, {A1_clean}>
+clean_A2 : at_A2 & A2_dirty <- <{A2_dirty}, {A2_clean}>
+clean_A3 : at_A3 & A3_dirty <- <{A3_dirty}, {A3_clean}>
+clean_B1 : at_B1 &B1_dirty <- <{B1_dirty}, {B1_clean}>
+clean_B2 : at_B2 &B2_dirty <- <{B2_dirty}, {B2_clean}>
+clean_B3 : at_B3 &B3_dirty <- <{B3_dirty}, {B3_clean}>
+clean_C1 : at_C1 & C1_dirty <- <{C1_dirty}, {C1_clean}>
+clean_C2 : at_C2 & C2_dirty <- <{C2_dirty}, {C2_clean}>
+clean_C3 : at_C3 & C3_dirty <- <{C3_dirty}, {C3_clean}>
+move_to_A2 : at_A1 <- <{at_A1},{at_A2}>
+move_to_A3 : at_A2 <- <{at_A2},{at_A3}>
+move_to_B3 : at_A3 <- <{at_A3},{at_B3}>
+move_to_B2 : at_B3 <- <{at_B3},{at_B2}>
+move_to_B1 : at_B2 <- <{at_B2},{at_B1}>
+move_to_C1 : at_B1 <- <{at_B1},{at_C1}>
+move_to_C2 : at_C1 <- <{at_C1},{at_C2}>
+move_to_C3 : at_C2 <- <{at_C2},{at_C3}>
+move_to_A1 : at_C3 <- <{at_C3},{at_A1}>

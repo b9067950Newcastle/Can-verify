@@ -1,0 +1,60 @@
+// Initial belief bases
+1. at_F1, F1_dirty, F1_uninspected, F2_clean, F2_inspected, F3_clean, F3_uninspected, F4_dirty, F4_uninspected,
+ F5_dirty, F5_uninspected, F6_clean, F6_uninspected, F7_clean, F7_uninspected, F8_clean, F8_uninspected
+
+// External events
+patrol
+
+// Plan library
+patrol : true <- goal(F1_inspected & F2_inspected & F3_inspected & F4_inspected & F5_inspected
+    & F6_inspected & F7_inspected & F8_inspected, check, false).
+check : at_F1 <- goal(F1_inspected, inspect, false); goal(F1_clean, vacum, false); go_to_F2.
+check : at_F2 <- goal(F2_inspected, inspect, false); goal(F2_clean, vacum, false); go_to_F3.
+check : at_F3 <- goal(F3_inspected, inspect, false); goal(F3_clean, vacum, false); go_to_F4.
+check : at_F4 <- goal(F4_inspected, inspect, false); goal(F4_clean, vacum, false); go_to_F5.
+check : at_F5 <- goal(F5_inspected, inspect, false); goal(F5_clean, vacum, false); go_to_F6.
+check : at_F6 <- goal(F6_inspected, inspect, false); goal(F6_clean, vacum, false); go_to_F7.
+check : at_F7 <- goal(F7_inspected, inspect, false); goal(F7_clean, vacum, false); go_to_F8.
+check : at_F8 <- goal(F8_inspected, inspect, false); goal(F8_clean, vacum, false); go_to_F1.
+inspect : at_F1 & F1_uninspected <- inspect_F1.
+inspect : at_F2 & F2_uninspected <- inspect_F2.
+inspect : at_F3 & F3_uninspected <- inspect_F3.
+inspect : at_F4 & F4_uninspected <- inspect_F4.
+inspect : at_F5 & F5_uninspected <- inspect_F5.
+inspect : at_F6 & F6_uninspected <- inspect_F6.
+inspect : at_F7 & F7_uninspected <- inspect_F7.
+inspect : at_F8 & F8_uninspected <- inspect_F8.
+vacum : at_F1 & F1_dirty <- clean_F1.
+vacum : at_F2 & F2_dirty <- clean_F2.
+vacum : at_F3 & F3_dirty <- clean_F3.
+vacum : at_F4 & F4_dirty <- clean_F4.
+vacum : at_F5 & F5_dirty <- clean_F5.
+vacum : at_F6 & F6_dirty <- clean_F6.
+vacum : at_F7 & F7_dirty <- clean_F7.
+vacum : at_F8 & F8_dirty <- clean_F8.
+
+// Actions description
+inspect_F1 : at_F1 & F1_uninspected <- <{F1_uninspected}, {F1_inspected}>
+inspect_F2 : at_F2 & F2_uninspected <- <{F2_uninspected}, {F2_inspected}>
+inspect_F3 : at_F3 & F3_uninspected <- <{F3_uninspected}, {F3_inspected}>
+inspect_F4 : at_F4 & F4_uninspected <- <{F4_uninspected}, {F4_inspected}>
+inspect_F5 : at_F5 & F5_uninspected <- <{F5_uninspected}, {F5_inspected}>
+inspect_F6 : at_F6 & F6_uninspected <- <{F6_uninspected}, {F6_inspected}>
+inspect_F7 : at_F7 & F7_uninspected <- <{F7_uninspected}, {F7_inspected}>
+inspect_F8 : at_F8 & F8_uninspected <- <{F8_uninspected}, {F8_inspected}>
+clean_F1 : at_F1 & F1_dirty <- <{F1_dirty}, {F1_clean}>
+clean_F2 : at_F2 & F2_dirty <- <{F2_dirty}, {F2_clean}>
+clean_F3 : at_F3 & F3_dirty <- <{F3_dirty}, {F3_clean}>
+clean_F4 : at_F4 & F4_dirty <- <{F4_dirty}, {F4_clean}>
+clean_F5 : at_F5 & F5_dirty <- <{F5_dirty}, {F5_clean}>
+clean_F6 : at_F6 & F6_dirty <- <{F6_dirty}, {F6_clean}>
+clean_F7 : at_F7 & F7_dirty <- <{F7_dirty}, {F7_clean}>
+clean_F8 : at_F8 & F8_dirty <- <{F8_dirty}, {F8_clean}>
+go_to_F2 : at_F1 <- <{at_F1},{at_F2}>
+go_to_F3 : at_F2 <- <{at_F2},{at_F3}>
+go_to_F4 : at_F3 <- <{at_F3},{at_F4}>
+go_to_F5 : at_F4 <- <{at_F4},{at_F5}>
+go_to_F6 : at_F5 <- <{at_F5},{at_F6}>
+go_to_F7 : at_F6 <- <{at_F6},{at_F7}>
+go_to_F8 : at_F7 <- <{at_F7},{at_F8}>
+go_to_F1 : at_F8 <- <{at_F8},{at_F1}>

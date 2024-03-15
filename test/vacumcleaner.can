@@ -1,0 +1,90 @@
+// Initial belief bases
+1. at_lu, lu_dirty, ru_clean, rd_clean, ld_clean
+2. at_lu, lu_clean, ru_clean, rd_clean, ld_dirty
+3. at_lu, lu_clean, ru_clean, rd_dirty, ld_clean
+4. at_lu, lu_clean, ru_dirty, rd_clean, ld_clean
+5. at_lu, lu_clean, ru_clean, rd_clean, ld_clean
+6. at_lu, lu_dirty, ru_dirty, rd_clean, ld_clean
+7. at_lu, lu_dirty, ru_clean, rd_dirty, ld_clean
+8. at_lu, lu_dirty, ru_clean, rd_clean, ld_dirty
+9. at_lu, lu_dirty, ru_dirty, rd_dirty, ld_clean
+10. at_lu, lu_dirty, ru_dirty, rd_clean, ld_dirty
+11. at_lu, lu_dirty, ru_dirty, rd_dirty, ld_dirty
+12. at_lu, lu_clean, ru_dirty, rd_dirty, ld_clean
+13. at_lu, lu_clean, ru_dirty, rd_dirty, ld_dirty
+14. at_lu, lu_clean, ru_clean, rd_dirty, ld_dirty
+15. at_lu, lu_dirty, ru_clean, rd_dirty, ld_dirty
+16. at_lu, lu_dirty, ru_dirty, rd_clean, ld_dirty
+17. at_ld, lu_dirty, ru_clean, rd_clean, ld_clean
+18. at_ld, lu_clean, ru_clean, rd_clean, ld_dirty
+19. at_ld, lu_clean, ru_clean, rd_dirty, ld_clean
+20. at_ld, lu_clean, ru_dirty, rd_clean, ld_clean
+21. at_ld, lu_clean, ru_clean, rd_clean, ld_clean
+22. at_ld, lu_dirty, ru_dirty, rd_clean, ld_clean
+23. at_ld, lu_dirty, ru_clean, rd_dirty, ld_clean
+24. at_ld, lu_dirty, ru_clean, rd_clean, ld_dirty
+25. at_ld, lu_dirty, ru_dirty, rd_dirty, ld_clean
+26. at_ld, lu_dirty, ru_dirty, rd_clean, ld_dirty
+27. at_ld, lu_dirty, ru_dirty, rd_dirty, ld_dirty
+28. at_ld, lu_clean, ru_dirty, rd_dirty, ld_clean
+29. at_ld, lu_clean, ru_dirty, rd_dirty, ld_dirty
+30. at_ld, lu_clean, ru_clean, rd_dirty, ld_dirty
+31. at_ld, lu_dirty, ru_clean, rd_dirty, ld_dirty
+32. at_ld, lu_dirty, ru_dirty, rd_clean, ld_dirty
+33. at_ru, lu_dirty, ru_clean, rd_clean, ld_clean
+34. at_ru, lu_clean, ru_clean, rd_clean, ld_dirty
+35. at_ru, lu_clean, ru_clean, rd_dirty, ld_clean
+36. at_ru, lu_clean, ru_dirty, rd_clean, ld_clean
+37. at_ru, lu_clean, ru_clean, rd_clean, ld_clean
+38. at_ru, lu_dirty, ru_dirty, rd_clean, ld_clean
+39. at_ru, lu_dirty, ru_clean, rd_dirty, ld_clean
+40. at_ru, lu_dirty, ru_clean, rd_clean, ld_dirty
+41. at_ru, lu_dirty, ru_dirty, rd_dirty, ld_clean
+42. at_ru, lu_dirty, ru_dirty, rd_clean, ld_dirty
+43. at_ru, lu_dirty, ru_dirty, rd_dirty, ld_dirty
+44. at_ru, lu_clean, ru_dirty, rd_dirty, ld_clean
+45. at_ru, lu_clean, ru_dirty, rd_dirty, ld_dirty
+46. at_ru, lu_clean, ru_clean, rd_dirty, ld_dirty
+47. at_ru, lu_dirty, ru_clean, rd_dirty, ld_dirty
+48. at_ru, lu_dirty, ru_dirty, rd_clean, ld_dirty
+49. at_rd, lu_dirty, ru_clean, rd_clean, ld_clean
+50. at_rd, lu_clean, ru_clean, rd_clean, ld_dirty
+51. at_rd, lu_clean, ru_clean, rd_dirty, ld_clean
+52. at_rd, lu_clean, ru_dirty, rd_clean, ld_clean
+53. at_rd, lu_clean, ru_clean, rd_clean, ld_clean
+54. at_rd, lu_dirty, ru_dirty, rd_clean, ld_clean
+55. at_rd, lu_dirty, ru_clean, rd_dirty, ld_clean
+56. at_rd, lu_dirty, ru_clean, rd_clean, ld_dirty
+57. at_rd, lu_dirty, ru_dirty, rd_dirty, ld_clean
+58. at_rd, lu_dirty, ru_dirty, rd_clean, ld_dirty
+59. at_rd, lu_dirty, ru_dirty, rd_dirty, ld_dirty
+60. at_rd, lu_clean, ru_dirty, rd_dirty, ld_clean
+61. at_rd, lu_clean, ru_dirty, rd_dirty, ld_dirty
+62. at_rd, lu_clean, ru_clean, rd_dirty, ld_dirty
+63. at_rd, lu_dirty, ru_clean, rd_dirty, ld_dirty
+64. at_rd, lu_dirty, ru_dirty, rd_clean, ld_dirty
+// External events
+init
+// Plan library
+init : true <- goal(lu_clean & ru_clean & rd_clean & ld_clean, clean, false).
+clean : at_lu <- goal(lu_clean, suck, false); move.
+clean : at_ru <- goal(ru_clean, suck, false); move.
+clean : at_ld <- goal(ld_clean, suck, false); move.
+clean : at_rd <- goal(rd_clean, suck, false); move.
+suck : at_lu & lu_dirty <- clean_lu.
+suck : at_ru & ru_dirty <- clean_ru.
+suck : at_ld & ld_dirty <- clean_ld.
+suck : at_rd & rd_dirty <- clean_rd.
+move : at_lu <- move_ru.
+move : at_ru <- move_rd.
+move : at_rd <- move_ld.
+move : at_ld <- move_lu.
+// Actions description
+clean_lu : at_lu & lu_dirty <- <{lu_dirty}, {lu_clean}>
+clean_ru : at_ru & ru_dirty <- <{ru_dirty}, {ru_clean}>
+clean_ld : at_ld & ld_dirty <- <{ld_dirty}, {ld_clean}>
+clean_rd : at_rd & rd_dirty <- <{rd_dirty}, {rd_clean}>
+move_ru : at_lu <- <{at_lu},{at_ru}>
+move_rd : at_ru <- <{at_ru},{at_rd}>
+move_ld : at_rd <- <{at_rd},{at_ld}>
+move_lu : at_ld <- <{at_ld},{at_lu}>

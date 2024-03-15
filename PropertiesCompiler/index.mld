@@ -1,0 +1,9 @@
+{1 PropertiesCompiler}
+
+A PRISM Properties compiler to translate properties written in human language.
+
+{2 Reference manual}
+
+The entry point is {!PropertiesCompiler}
+
+@author Thibault Rivoalen

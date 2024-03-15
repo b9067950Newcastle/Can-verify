@@ -1,0 +1,9 @@
+(executable
+ (package CAN-Verify)
+ (name main)
+ (public_name CAN-Verify)
+ (libraries CAN2BigraphERCompiler PropertiesCompiler))
+
+(documentation
+ (package CAN-Verify)
+ (mld_files (:standard)))

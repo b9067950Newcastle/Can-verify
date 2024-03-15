@@ -1,0 +1,14 @@
+(ocamllex lexer)
+
+(menhir
+ (modules parser))
+
+(library
+ (public_name CAN2BigraphERCompiler)
+ (wrapped true)
+ (private_modules parser lexer)
+ (name CAN2BigraphERCompiler))
+
+(documentation
+ (package CAN2BigraphERCompiler)
+ (mld_files (:standard)))

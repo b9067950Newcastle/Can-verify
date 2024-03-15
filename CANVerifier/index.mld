@@ -1,0 +1,50 @@
+{1 CAN-Verify}
+
+{2 Description}
+
+The aim of this program is to translate CAN code to BigraphER code and run BigraphER and PRISM for verification.
+
+It was developped by Thibault Rivoalen ({{:mailto:thibault.rivoalen@alumni.enac.fr}thibault.rivoalen@alumni.enac.fr}) for the University of Glasgow, UK.
+
+
+{2 Building the program}
+
+{3 With Docker for a standalone version}
+
+Run [make docker] to have a [can-verify] Docker image built.
+
+{3 Without Docker for a faster version}
+
+To build the project and have an executable [CAN-Verify] (promoted to the root folder), run: [make]
+
+A documentation will also be build during the process.
+
+{4 Dependencies}
+Java 17 (or above), PRISM model checker in the PATH
+
+Opam/OCaml, dune, dune-configurator, jsonm, menhir, cmdliner, ppx_optcomp, mtime, zarith, odoc, BigraphER in the PATH
+
+
+{2 Usage }
+
+{3 With Docker}
+Run the program with your current directory files with
+
+[docker run --rm --volume "${PWD}":/test_rep --interactive can-verify [options] <file.can>]
+
+{3 Without Docker}
+Run [./CAN-Verify  [options] <file.can>]
+
+{3 Options}
+{ul
+{- [-static] to check if the CAN model is correct}
+{- [-Ms] to put the maximum number of states for BigraphER (default value: 4000)}
+{- [-mp] to put the minimum number of plans required (default value: 2)}
+{- [-Mp] to put the maximum number of plans allowed (default value: 100)}
+{- [-mc] to put the minimum number of characters required for a name (default value: 2)}
+{- [-Mc] to put the maximum number of characters allowed for a name (default value: 20)}
+{- [-dynamic] to verify the model with BigraphER and PRISM (do not forget the [-p] option)}
+{- [-p] to tell the program the file of the properties in human language}
+}
+
+@author Thibault Rivoalen

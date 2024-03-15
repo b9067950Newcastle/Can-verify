@@ -1,0 +1,144 @@
+
+CAN-Verify
+==========
+
+Static check in progress ...
+Parsing test/floor_security/floor_security_robot8.can ...
+
+Checking for belief base 1 ... 
+Checking OK
+
+Static check completed
+
+Parsing test/prop.txt ...
+
+Dynamic check in progress for belief base 1...
+
+[01mBigraphER: Bigraph Evaluator & Rewriting[m
+========================================
+[1;34mVersion:[m       1.9.3
+[1;34mDate:[m          Thu Aug 18 11:40:47 2022
+[1;34mHostname:[m      glaroam2-154-85.wireless.gla.ac.uk
+[1;34mOS type:[m       Unix
+[1;34mSolver:[m        MiniCARD
+[1;34mCommand line:[m  bigrapher full -M 4000 -p test/floor_security/floor_security_robot8.tra -l test/floor_security/floor_security_robot8.csl --solver=MCARD test/floor_security/floor_security_robot8.big
+[33mParsing model file test/floor_security/floor_security_robot8.big ...[m
+[36mType:[m          Probabilistic BRS
+[36mBindings:[m      105     
+[36m# of rules:[m    278     
+[33mComputing DTMC ...[m
+[36mMax # states:[m  4000    
+
+[.............................]
+
+[32mBuild time:[m    736.758
+[32mStates:[m        118     
+[32mTransitions:[m   117     
+[32mOccurrences:[m   1866    
+[33mExporting Probabilistic BRS in PRISM format to test/floor_security/floor_security_robot8.tra ...[m
+[33mExporting properties to test/floor_security/floor_security_robot8.csl ...[m
+PRISM
+=====
+
+Version: 4.7
+Date: Thu Aug 18 11:53:06 BST 2022
+Hostname: glaroam2-154-85.wireless.gla.ac.uk
+Memory limits: cudd=1g, java(heap)=1g
+Command line: prism -importtrans test/floor_security/floor_security_robot8.tra test/floor_security/floor_security_robot8.csl
+
+Importing model from "test/floor_security/floor_security_robot8.tra"...
+Auto-detected model type: DTMC
+
+Parsing properties file "test/floor_security/floor_security_robot8.csl"...
+
+4 properties:
+(1) A [ F ("no_failure"&(X "empty_intention")) ]
+(2) E [ F ("no_failure"&(X "empty_intention")) ]
+(3) A [ F ("failure"&(X "empty_intention")) ]
+(4) E [ F ("failure"&(X "empty_intention")) ]
+
+---------------------------------------------------------------------
+
+Model checking: A [ F ("no_failure"&(X "empty_intention")) ]
+
+Warning: Switching to explicit engine to allow non-probabilistic LTL model checking.
+
+Building model...
+
+Time for model construction: 0.027 seconds.
+
+Warning: Deadlocks detected and fixed in 1 states
+
+Type:        DTMC
+States:      118 (1 initial)
+Transitions: 118
+Non-probabilistic LTL model checking for E[ !F ("L0"&(X "L1")) ]
+Constructing NBA... NBA has 2 states
+Constructing DTMC-NBA product as LTS... 234 states (1 initial), 464 transitions, 234 states accepting
+Searching for non-trivial, accepting SCCs in product LTS... 0 of 0 non-trivial SCCs are accepting
+Computing reachability of accepting SCCs...
+Calculating predecessor relation for labelled transition system...  done (0.005 seconds)
+
+Property satisfied in 1 of 1 initial states.
+
+Time for model checking: 0.08 seconds.
+
+Result: true
+
+---------------------------------------------------------------------
+
+Model checking: E [ F ("no_failure"&(X "empty_intention")) ]
+
+Warning: Switching to explicit engine to allow non-probabilistic LTL model checking.
+Non-probabilistic LTL model checking for E[ F ("L0"&(X "L1")) ]
+Constructing NBA... NBA has 3 states
+Constructing DTMC-NBA product as LTS... 120 states (1 initial), 121 transitions, 2 states accepting
+Searching for non-trivial, accepting SCCs in product LTS... 1 of 2 non-trivial SCCs are accepting
+Computing reachability of accepting SCCs...
+Calculating predecessor relation for labelled transition system...  done (0.0 seconds)
+
+Property satisfied in 1 of 1 initial states.
+
+Time for model checking: 0.005 seconds.
+
+Result: true
+
+---------------------------------------------------------------------
+
+Model checking: A [ F ("failure"&(X "empty_intention")) ]
+
+Warning: Switching to explicit engine to allow non-probabilistic LTL model checking.
+Non-probabilistic LTL model checking for E[ !F (false&(X "L0")) ]
+Constructing NBA... NBA has 1 states
+Constructing DTMC-NBA product as LTS... 118 states (1 initial), 118 transitions, 118 states accepting
+Searching for non-trivial, accepting SCCs in product LTS... 1 of 1 non-trivial SCCs are accepting
+Computing reachability of accepting SCCs...
+Calculating predecessor relation for labelled transition system...  done (0.0 seconds)
+
+Property satisfied in 0 of 1 initial states.
+
+Time for model checking: 0.003 seconds.
+
+Result: false
+
+---------------------------------------------------------------------
+
+Model checking: E [ F ("failure"&(X "empty_intention")) ]
+
+Warning: Switching to explicit engine to allow non-probabilistic LTL model checking.
+Non-probabilistic LTL model checking for E[ F (false&(X "L0")) ]
+Constructing NBA... NBA has 1 states
+Constructing DTMC-NBA product as LTS... 1 states (1 initial), 0 transitions, 0 states accepting
+None of the states in the product are accepting, skipping further computations
+Property satisfied in 0 of 1 initial states.
+
+Time for model checking: 0.001 seconds.
+
+Result: false
+
+---------------------------------------------------------------------
+
+Note: There were 5 warnings during computation.
+
+Dynamic check completed for belief base 1
+End of program

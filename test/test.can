@@ -1,0 +1,16 @@
+// Initial belief bases
+1. Nobattery_low, Noharsh_weather
+// External events
+init1
+// Plan library
+init1 : true <- goal(false, patrol_task, false).
+patrol_task : true <- goal(success, patrol, false); pause.
+patrol : true <- patrolBattery.
+pause : battery_low <- request; wait; charge.
+pause : harsh_weather <- activate_parking.
+// Actions description
+patrolBattery : true <- <{Nobattery_low},{battery_low}>
+request: true <- <{}, {}>
+wait: true <- <{}, {}>
+charge: true <- <{battery_low, success}, {Nobattery_low}>
+activate_parking: true <- <{harsh_weather, success}, {Noharsh_weather}>

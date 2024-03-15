@@ -1,0 +1,22 @@
+// Initial belief bases
+1. Nosensor_malfunc, Noengine_malfunc
+// External events
+retrv
+// Plan library
+retrv : Nosensor_malfunc & Noengine_malfunc <- take_off; goal(success, path1, failure); retrieve.
+retrv : Nosensor_malfunc & Noengine_malfunc <- take_off; goal(success, path2, failure); retrieve.
+retrv : Nosensor_malfunc & Noengine_malfunc <- take_off; goal(success, path3, failure); retrieve.
+retrv : B_sensor_malfunc <- return_base.
+retrv : engine_malfunc <- activate_parking; send_GPS.
+path1 : true <- navigate_path_1.
+path2 : true <- navigate_path_2.
+path3 : true <- navigate_path_3.
+// Actions description
+take_off : true <- <{}, {}>
+retrieve : true <- <{}, {}>
+return_base : true <- <{}, {}>
+activate_parking : true <- <{}, {}>
+send_GPS : true <- <{}, {}>
+navigate_path_1 : true <- <{Noengine_malfunc}, {failure, engine_malfunc}>
+navigate_path_2 : true <- <{}, {success}>
+navigate_path_3 : true <- <{}, {success}>

@@ -1,0 +1,22 @@
+// Initial belief bases
+1. at_F1, F1_dirty, F1_uninspected, F2_clean, F2_inspected
+
+// External events
+patrol
+
+// Plan library
+patrol : true <- goal(F1_inspected & F2_inspected, check, false).
+check : at_F1 <- goal(F1_inspected, inspect, false); goal(F1_clean, vacum, false); go_to_F2.
+check : at_F2 <- goal(F2_inspected, inspect, false); goal(F2_clean, vacum, false); go_to_F1.
+inspect : at_F1 & F1_uninspected <- inspect_F1.
+inspect : at_F2 & F2_uninspected <- inspect_F2.
+vacum : at_F1 & F1_dirty <- clean_F1.
+vacum : at_F2 & F2_dirty <- clean_F2.
+
+// Actions description
+inspect_F1 : at_F1 & F1_uninspected <- <{F1_uninspected}, {F1_inspected}>
+inspect_F2 : at_F2 & F2_uninspected <- <{F2_uninspected}, {F2_inspected}>
+clean_F1 : at_F1 & F1_dirty <- <{F1_dirty}, {F1_clean}>
+clean_F2 : at_F2 & F2_dirty <- <{F2_dirty}, {F2_clean}>
+go_to_F2 : at_F1 <- <{at_F1},{at_F2}>
+go_to_F1 : at_F2 <- <{at_F2},{at_F1}>

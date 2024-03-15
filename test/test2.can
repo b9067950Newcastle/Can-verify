@@ -1,0 +1,15 @@
+// Initial belief bases
+1. ram_free, storage_free
+// External events
+init2
+// Plan library
+init2 : true <- dust|| photo.
+dust : ram_free & storage_free <- collect_dust; analyse; send_back.
+photo : ram_free & storage_free <- focus_camera; save_shots; zip_shots.
+// Actions description
+collect_dust : ram_free <- <{ram_free}, {}>
+analyse : true <- <{}, {}>
+send_back : storage_free <- <{}, {ram_free, storage_free}>
+focus_camera : true <- <{}, {}>
+save_shots : storage_free <- <{storage_free},{}>
+zip_shots : ram_free <- <{}, {ram_free, storage_free}>

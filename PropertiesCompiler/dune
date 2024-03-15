@@ -1,0 +1,14 @@
+(ocamllex lexer)
+
+(menhir
+ (modules parser))
+
+(library
+ (public_name PropertiesCompiler)
+ (wrapped true)
+ (private_modules parser lexer)
+ (name PropertiesCompiler))
+
+(documentation
+ (package PropertiesCompiler)
+ (mld_files (:standard)))

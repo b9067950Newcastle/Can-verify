@@ -1,0 +1,9 @@
+{1 CAN2BigraphERCompiler}
+
+A CAN to BigraphER compiler to simplify the analysis of BDI agents written in CAN language.
+
+{2 Reference manual}
+
+The entry point is {!CAN2BigraphERCompiler}
+
+@author Thibault Rivoalen

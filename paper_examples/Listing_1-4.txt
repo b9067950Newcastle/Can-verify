@@ -1,0 +1,8 @@
+In all possible executions, eventually the belief F1_clean holds.
+In some executions, eventually the belief F1_clean holds.
+In all possible executions, eventually the belief F2_clean holds.
+In some executions, eventually the belief F2_clean holds.
+In all possible executions, eventually the belief F1_inspected holds.
+In some executions, eventually the belief F1_inspected holds.
+In all possible executions, eventually the belief F2_inspected holds.
+In some executions, eventually the belief F2_inspected holds.
