@@ -64,10 +64,22 @@ action :
     | action_t action { Array.append $1 $2 }
 
 action_t :
-    | STRING COLON cond ARROW LA LB set RB COMMA LB set RB RA { Array.make 1 (Action($1, $3, Del($7), Add($11))) }
-    | STRING COLON cond ARROW LA LB RB COMMA LB set RB RA { Array.make 1 (Action($1, $3, Del([|Belief("")|]), Add($10))) }
-    | STRING COLON cond ARROW LA LB set RB COMMA LB RB RA { Array.make 1 (Action($1, $3, Del($7), Add([|Belief("")|]))) }
-    | STRING COLON cond ARROW LA LB RB COMMA LB RB RA { Array.make 1 (Action($1, $3, Del([|Belief("")|]), Add([|Belief("")|]))) }
+    | STRING COLON cond ARROW LA STRING COMMA LB set RB COMMA LB set RB RA COMMA LA STRING COMMA LB set RB COMMA LB set RB RA { Array.make 1 (Action($1, $3, $6, Del($9), Add($13), $18, Del($21), Add($25))) }
+    | STRING COLON cond ARROW LA STRING COMMA LB set RB COMMA LB set RB RA COMMA LA STRING COMMA LB set RB COMMA LB RB RA { Array.make 1 (Action($1, $3, $6, Del($9), Add($13), $18, Del($21), Add([|Belief("")|]))) }
+    | STRING COLON cond ARROW LA STRING COMMA LB set RB COMMA LB set RB RA COMMA LA STRING COMMA LB RB COMMA LB set RB RA { Array.make 1 (Action($1, $3, $6, Del($9), Add($13), $18, Del([|Belief("")|]), Add($24))) }
+    | STRING COLON cond ARROW LA STRING COMMA LB set RB COMMA LB RB RA COMMA LA STRING COMMA LB set RB COMMA LB set RB RA { Array.make 1 (Action($1, $3, $6, Del($9), Add([|Belief("")|]), $17, Del($20), Add($24))) }
+    | STRING COLON cond ARROW LA STRING COMMA LB RB COMMA LB set RB RA COMMA LA STRING COMMA LB set RB COMMA LB set RB RA { Array.make 1 (Action($1, $3, $6, Del([|Belief("")|]), Add($12), $17, Del($20), Add($24))) }
+    | STRING COLON cond ARROW LA STRING COMMA LB set RB COMMA LB set RB RA COMMA LA STRING COMMA LB RB COMMA LB RB RA { Array.make 1 (Action($1, $3, $6, Del($9), Add($13), $18, Del([|Belief("")|]), Add([|Belief("")|]))) }
+    | STRING COLON cond ARROW LA STRING COMMA LB set RB COMMA LB RB RA COMMA LA STRING COMMA LB RB COMMA LB set RB RA { Array.make 1 (Action($1, $3, $6, Del($9), Add([|Belief("")|]), $17, Del([|Belief("")|]), Add($23))) }
+    | STRING COLON cond ARROW LA STRING COMMA LB set RB COMMA LB RB RA COMMA LA STRING COMMA LB set RB COMMA LB RB RA { Array.make 1 (Action($1, $3, $6, Del($9), Add([|Belief("")|]), $17, Del($20), Add([|Belief("")|]))) }
+    | STRING COLON cond ARROW LA STRING COMMA LB RB COMMA LB set RB RA COMMA LA STRING COMMA LB set RB COMMA LB RB RA { Array.make 1 (Action($1, $3, $6, Del([|Belief("")|]), Add($12), $17, Del($20), Add([|Belief("")|]))) }
+    | STRING COLON cond ARROW LA STRING COMMA LB RB COMMA LB set RB RA COMMA LA STRING COMMA LB RB COMMA LB set RB RA { Array.make 1 (Action($1, $3, $6, Del([|Belief("")|]), Add($12), $17, Del([|Belief("")|]), Add($23))) }
+    | STRING COLON cond ARROW LA STRING COMMA LB RB COMMA LB RB RA COMMA LA STRING COMMA LB set RB COMMA LB set RB RA { Array.make 1 (Action($1, $3, $6, Del([|Belief("")|]), Add([|Belief("")|]), $16, Del($19), Add($23))) }
+    | STRING COLON cond ARROW LA STRING COMMA LB set RB COMMA LB RB RA COMMA LA STRING COMMA LB RB COMMA LB RB RA { Array.make 1 (Action($1, $3, $6, Del($9), Add([|Belief("")|]), $17, Del([|Belief("")|]), Add([|Belief("")|]))) }
+    | STRING COLON cond ARROW LA STRING COMMA LB RB COMMA LB set RB RA COMMA LA STRING COMMA LB RB COMMA LB RB RA { Array.make 1 (Action($1, $3, $6, Del([|Belief("")|]), Add($12), $17, Del([|Belief("")|]), Add([|Belief("")|]))) }
+    | STRING COLON cond ARROW LA STRING COMMA LB RB COMMA LB RB RA COMMA LA STRING COMMA LB set RB COMMA LB RB RA { Array.make 1 (Action($1, $3, $6, Del([|Belief("")|]), Add([|Belief("")|]), $16, Del($19), Add([|Belief("")|]))) }
+    | STRING COLON cond ARROW LA STRING COMMA LB RB COMMA LB RB RA COMMA LA STRING COMMA LB RB COMMA LB set RB RA { Array.make 1 (Action($1, $3, $6, Del([|Belief("")|]), Add([|Belief("")|]), $16, Del([|Belief("")|]), Add($22))) }
+    | STRING COLON cond ARROW LA STRING COMMA LB RB COMMA LB RB RA COMMA LA STRING COMMA LB RB COMMA LB RB RA { Array.make 1 (Action($1, $3, $6, Del([|Belief("")|]), Add([|Belief("")|]), $16, Del([|Belief("")|]), Add([|Belief("")|]))) }
 
 set :
     | set COMMA set { Array.append $1 $3 }

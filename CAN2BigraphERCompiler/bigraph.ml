@@ -121,11 +121,11 @@ let plan_array_build event c pb =
   | Some i -> !plans.(i) <- !plans.(i) @ [ plan_s ]
   | None -> plans := Array.append !plans [| [ event; plan_s ] |]
 
-let action_str_build act cond del add =
+let action_str_build act cond eff_a del_a add_a eff_b del_b add_b =
   actions :=
     !actions
-    ^ Printf.sprintf "big %s = Act.(Pre.(%s) | Del.(%s) | Add.(%s));\n" act cond
-        del add
+    ^ Printf.sprintf "big %s = Act.(Pre.(%s) |Effect.(Del.(%s) | Add.(%s)|EffWeight(%s))|Effect.((Del.(%s) | Add.(%s)|EffWeight(%s))));\n" act cond
+        del_a add_a eff_a del_b add_b eff_b
 
 let fold_merge str ch =
   if String.equal str "" then ch else Printf.sprintf "%s \n\t\t| %s" ch str

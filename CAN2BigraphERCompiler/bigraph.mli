@@ -108,7 +108,7 @@ val find_i : string list array -> string -> int -> int option
 val plan_array_build : string -> Syntax.cond -> string -> unit
 (** Contructs the ref {!val:plans} with BigraphER code.*)
 
-val action_str_build : string -> string -> string -> string -> unit
+val action_str_build : string -> string -> string -> string -> string -> string -> string -> string -> unit
 (** Constructs the ref {!val:actions} with BigraphER code. *)
 
 val fold_merge : string -> string -> string

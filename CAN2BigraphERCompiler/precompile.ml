@@ -47,11 +47,15 @@ let rec c_action actions =
   match actions with
   | h :: t -> (
       match h with
-      | Action (str, c, del, add) ->
+      | Action (str, c, eff_a, del_a, add_a, eff_b, del_b, add_b) ->
           a_type str;
           c_cond c;
-          c_set del;
-          c_set add;
+          a_type eff_a;
+          c_set del_a;
+          c_set add_a;
+          a_type eff_b;
+          c_set del_b;
+          c_set add_b;
           c_action t)
   | [] -> ()
 

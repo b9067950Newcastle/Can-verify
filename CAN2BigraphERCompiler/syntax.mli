@@ -22,7 +22,7 @@ type belief = Belief of string
 type desire = Desire of string
 type plan = Plan of string * cond * plan_body
 type set = Add of belief array | Del of belief array
-type action = Action of string * cond * set * set
+type action = Action of string * cond * string * set * set * string * set * set
 
 type line =
   | Seq_line of line * line
