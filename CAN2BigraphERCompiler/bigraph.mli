@@ -83,7 +83,7 @@ val transform_belief : Syntax.belief array -> string array
 val transform_desire : Syntax.desire array -> string array
 (** Transforms the desire array into string array for {!val:str_build_desire}. *)
 
-val belief : string -> string -> string
+val belief : string -> string -> string -> string -> string
 (** Helper function for a [fold_left] that concatenate the beliefs with the good typo.*)
 
 val desire : string -> string -> string

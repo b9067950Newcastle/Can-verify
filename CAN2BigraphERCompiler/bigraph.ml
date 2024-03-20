@@ -42,9 +42,9 @@ let goal sc e fc =
 let seq_pb pb1 pb2 = Printf.sprintf "Seq.(%s | Cons.(%s))" pb1 pb2
 let conc_pb pb1 pb2 = Printf.sprintf "Conc.(L.(%s) | R.(%s))" pb1 pb2
 
-let belief str ch =
-  if String.equal str "" then Printf.sprintf "B(\"%s\")" ch
-  else Printf.sprintf "%s | B(\"%s\")" str ch
+let belief str ch posv negv=
+  if String.equal str "" then Printf.sprintf "B(\"%s\", \"%s\", \"%s\")" ch posv negv
+  else Printf.sprintf "%s | B(\"%s\", \"%s\", \"%s\")" str ch posv negv
 
 let desire str ch =
   if String.equal str "" then event ch
@@ -56,8 +56,9 @@ let transform_belief array =
     if i >= n then acc
     else
       match array.(i) with
-      | Belief b ->
-          let acc = Array.append acc [| b |] in
+      | Belief (b, posv, negv) ->
+      		let new_belief_str = belief "" b posv negv in
+          let acc = Array.append acc [| new_belief_str |] in
           scan (i + 1) acc
   in
   scan 0 [||]
@@ -74,7 +75,8 @@ let transform_desire array =
   in
   scan 0 [||]
 
-let str_build_belief array = Array.fold_left belief "" (transform_belief array)
+let str_build_belief array =
+  Array.fold_left (fun acc el -> if acc = "" then el else acc ^ " | " ^ el) "" (transform_belief array)
 
 let rec strs_build_belief list =
   match list with
@@ -102,7 +104,7 @@ let set s =
             let _ = var x in
             ())
           array;
-        Array.fold_left belief "" array)
+        Array.fold_left (fun acc el -> if acc = "" then el else acc ^ " | " ^ el) "" array)
 
 let rec find_i array elt n =
   (* must start with i=1 because of how are built the array *)
@@ -518,7 +520,7 @@ let make_predicates () =
       in
       let decl =
         Printf.sprintf "Beliefs.(%s | id)"
-          (Array.fold_left belief "" !preds.(i))
+          (Array.fold_left (fun acc el -> if acc = "" then el else acc ^ " | " ^ el) "" !preds.(i))
       in
       let decl = Printf.sprintf "big predicate_%s = %s;\n" pred_name decl in
       let decls = Array.append decls [| decl |] in

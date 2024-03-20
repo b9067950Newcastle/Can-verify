@@ -40,7 +40,11 @@ let c_set set =
       Array.iter
         (fun x ->
           match x with
-          | Belief bel -> if not (String.equal bel "") then b_type bel else ())
+          | Belief (bel, posv, negv) ->
+          		b_type bel; 
+              a_type posv; 
+              a_type negv 
+        )
         b
 
 let rec c_action actions =
@@ -70,7 +74,7 @@ let rec c_line line =
       let rec scan l =
         match l with
         | (_, h) :: t ->
-            Array.iter (fun x -> match x with Belief bel -> b_type bel) h;
+            Array.iter (fun x -> match x with Belief (bel, posv, negv) -> b_type bel; a_type posv; a_type negv) h;
             scan t
         | [] -> ()
       in
