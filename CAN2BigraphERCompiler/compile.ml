@@ -28,8 +28,8 @@ let rec c_action actions =
   match actions with
   | h :: t -> (
       match h with
-      | Action (str, c, del, add) ->
-          action_str_build str (cond c) (set del) (set add);
+      | Action (str, c, del, ac_posv, ac_posv_eff, add, ac_negv, ac_negv_eff) ->
+          action_str_build str (cond c) (set del) ac_posv ac_posv_eff (set add) ac_negv ac_negv_eff;
           c_action t)
   | [] -> ()
 

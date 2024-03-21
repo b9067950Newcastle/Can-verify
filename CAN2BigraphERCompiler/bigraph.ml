@@ -42,9 +42,16 @@ let goal sc e fc =
 let seq_pb pb1 pb2 = Printf.sprintf "Seq.(%s | Cons.(%s))" pb1 pb2
 let conc_pb pb1 pb2 = Printf.sprintf "Conc.(L.(%s) | R.(%s))" pb1 pb2
 
-let belief str ch =
-  if String.equal str "" then Printf.sprintf "B(\"%s\")" ch
-  else Printf.sprintf "%s | B(\"%s\")" str ch
+let belief str ch posv negv=
+  if String.equal posv "" then 
+  	if String.equal str "" then Printf.sprintf "B(\"%s\")" ch
+  	else Printf.sprintf "%s | B(\"%s\")" str ch
+  else
+    let posv_int = int_of_string posv in
+    let negv_int = int_of_string negv in
+    if String.equal str "" then Printf.sprintf "B(\"%s\").(Pw(%d) | Nw(%d))" ch posv_int negv_int
+    else Printf.sprintf "%s | B(\"%s\").(Pw(%d) | Nw(%d))" str ch posv_int negv_int
+
 
 let desire str ch =
   if String.equal str "" then event ch
@@ -56,8 +63,9 @@ let transform_belief array =
     if i >= n then acc
     else
       match array.(i) with
-      | Belief b ->
-          let acc = Array.append acc [| b |] in
+      | Belief (b, posv, negv) ->
+      		let new_belief_str = belief "" b posv negv in
+          let acc = Array.append acc [| new_belief_str |] in
           scan (i + 1) acc
   in
   scan 0 [||]
@@ -74,7 +82,8 @@ let transform_desire array =
   in
   scan 0 [||]
 
-let str_build_belief array = Array.fold_left belief "" (transform_belief array)
+let str_build_belief array =
+  Array.fold_left (fun acc el -> if acc = "" then el else acc ^ " | " ^ el) "" (transform_belief array)
 
 let rec strs_build_belief list =
   match list with
@@ -102,7 +111,7 @@ let set s =
             let _ = var x in
             ())
           array;
-        Array.fold_left belief "" array)
+        Array.fold_left (fun acc el -> if acc = "" then el else acc ^ " | " ^ el) "" array)
 
 let rec find_i array elt n =
   (* must start with i=1 because of how are built the array *)
@@ -121,11 +130,11 @@ let plan_array_build event c pb =
   | Some i -> !plans.(i) <- !plans.(i) @ [ plan_s ]
   | None -> plans := Array.append !plans [| [ event; plan_s ] |]
 
-let action_str_build act cond del add =
+let action_str_build act cond del ac_posv ac_posv_eff add ac_negv ac_negv_eff =
   actions :=
     !actions
-    ^ Printf.sprintf "big %s = Act.(Pre.(%s) | Del.(%s) | Add.(%s));\n" act cond
-        del add
+    ^ Printf.sprintf "big %s = Act.(Pre.(%s) | Effect.(Revise.(%s).Pw(%s), EffectWeight(%s)) | Effect.(Revise(%s).Nw(%s), EffectWeight(%s)));\n" act cond
+        del ac_posv ac_posv_eff add ac_negv ac_negv_eff
 
 let fold_merge str ch =
   if String.equal str "" then ch else Printf.sprintf "%s \n\t\t| %s" ch str
@@ -518,7 +527,7 @@ let make_predicates () =
       in
       let decl =
         Printf.sprintf "Beliefs.(%s | id)"
-          (Array.fold_left belief "" !preds.(i))
+          (Array.fold_left (fun acc el -> if acc = "" then el else acc ^ " | " ^ el) "" !preds.(i))
       in
       let decl = Printf.sprintf "big predicate_%s = %s;\n" pred_name decl in
       let decls = Array.append decls [| decl |] in

@@ -83,7 +83,7 @@ val transform_belief : Syntax.belief array -> string array
 val transform_desire : Syntax.desire array -> string array
 (** Transforms the desire array into string array for {!val:str_build_desire}. *)
 
-val belief : string -> string -> string
+val belief : string -> string -> string -> string -> string
 (** Helper function for a [fold_left] that concatenate the beliefs with the good typo.*)
 
 val desire : string -> string -> string
@@ -108,7 +108,7 @@ val find_i : string list array -> string -> int -> int option
 val plan_array_build : string -> Syntax.cond -> string -> unit
 (** Contructs the ref {!val:plans} with BigraphER code.*)
 
-val action_str_build : string -> string -> string -> string -> unit
+val action_str_build : string -> string -> string -> string -> string -> string -> string -> string -> unit
 (** Constructs the ref {!val:actions} with BigraphER code. *)
 
 val fold_merge : string -> string -> string
