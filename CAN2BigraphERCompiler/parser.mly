@@ -26,11 +26,11 @@ belief_num:
 
 belief_num_t:
     | NUM belief { [(int_of_float (float_of_string $1), $2)] }
-    | NUM { [(int_of_float (float_of_string $1), [|Belief("")|])] }
+    | NUM { [(int_of_float (float_of_string $1), [|Belief("", "", "")|])] }
 
 belief:
     | belief COMMA belief { Array.append $1 $3 }
-    | STRING { Array.make 1 (Belief($1)) }
+    | STRING COLON LA STRING COMMA STRING RA { Array.make 1 (Belief($1, $4, $6)) }
 
 desire:
     | desire COMMA desire { Array.append $1 $3 }
@@ -64,11 +64,8 @@ action :
     | action_t action { Array.append $1 $2 }
 
 action_t :
-    | STRING COLON cond ARROW LA LB set RB COMMA LB set RB RA { Array.make 1 (Action($1, $3, Del($7), Add($11))) }
-    | STRING COLON cond ARROW LA LB RB COMMA LB set RB RA { Array.make 1 (Action($1, $3, Del([|Belief("")|]), Add($10))) }
-    | STRING COLON cond ARROW LA LB set RB COMMA LB RB RA { Array.make 1 (Action($1, $3, Del($7), Add([|Belief("")|]))) }
-    | STRING COLON cond ARROW LA LB RB COMMA LB RB RA { Array.make 1 (Action($1, $3, Del([|Belief("")|]), Add([|Belief("")|]))) }
+    | STRING COLON cond ARROW LA set COLON LB STRING COMMA STRING RB RA COMMA LA set COLON LB STRING COMMA STRING RB RA { Array.make 1 (Action($1, $3, Del($6), $9, $11, Add($16), $19, $21)) }
 
 set :
     | set COMMA set { Array.append $1 $3 }
-    | STRING { Array.make 1 (Belief($1)) }
+    | STRING { Array.make 1 (Belief($1, "", "")) }
