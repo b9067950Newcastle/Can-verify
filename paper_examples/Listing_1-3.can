@@ -1,5 +1,5 @@
 // Initial belief bases
-1. ram_free, storage_free
+1. ram_free: <4, 6>, storage_free : <7,3>
 // External events
 init2
 // Plan library
@@ -7,9 +7,9 @@ init2 : true <- dust|| photo.
 dust : ram_free & storage_free <- collect_dust; analyse; send_back.
 photo : ram_free & storage_free <- focus_camera; save_shots; zip_shots.
 // Actions description
-collect_dust : ram_free <- <{ram_free}, {}>
-analyse : true <- <{}, {}>
-send_back : storage_free <- <{}, {ram_free, storage_free}>
-focus_camera : true <- <{}, {}>
-save_shots : storage_free <- <{storage_free},{}>
-zip_shots : ram_free <- <{}, {ram_free, storage_free}>
+collect_dust : ram_free <- < ram_free: {4, 7} >, < ram_free: {6, 3}>
+analyse : true <- < ram_free: {1, 2} >, < ram_free: {3, 4}>
+send_back : storage_free <- < ram_free: {5, 6} >, < ram_free: {7, 8}>
+focus_camera : true <- < ram_free: {9, 7} >, < ram_free: {6, 3}>
+save_shots : storage_free <- < ram_free: {4, 7} >, < ram_free: {6, 3}>
+zip_shots : ram_free <- < ram_free: {4, 7} >, < ram_free: {6, 3}>
