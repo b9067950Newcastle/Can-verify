@@ -44,8 +44,8 @@ let conc_pb pb1 pb2 = Printf.sprintf "Conc.(L.(%s) | R.(%s))" pb1 pb2
 
 let belief str ch posv negv=
   if String.equal posv "" then 
-  	if String.equal str "" then Printf.sprintf "B(\"%s\")" ch
-  	else Printf.sprintf "%s | B(\"%s\")" str ch
+  	if String.equal str "" then Printf.sprintf "%s" ch
+  	else Printf.sprintf "%s | %s" str ch
   else
     let posv_int = int_of_string posv in
     let negv_int = int_of_string negv in
@@ -133,7 +133,7 @@ let plan_array_build event c pb =
 let action_str_build act cond del ac_posv ac_posv_eff add ac_negv ac_negv_eff =
   actions :=
     !actions
-    ^ Printf.sprintf "big %s = Act.(Pre.(%s) | Effect.(Revise.%s.Pw(%s) | EffectWeight(%s)) | Effect.(Revise.%s.Nw(%s) | EffectWeight(%s)));\n" act cond
+    ^ Printf.sprintf "big %s = Act.(Pre.(%s) | Effect.(Revise.B(\"%s\").Pw(%s) | EffectWeight(%s)) | Effect.(Revise.B(\"%s\").Nw(%s) | EffectWeight(%s)));\n" act cond
         del ac_posv ac_posv_eff add ac_negv ac_negv_eff
 
 let fold_merge str ch =
@@ -700,10 +700,11 @@ react intention_done_succ =
    "
 
 let print_bigraph_sim =
-  "
-  
-  init model;\n\
-  \   int pw0 = [0:1:10];
+  "    # init model_patrolling;
+    # init model_concurrency;
+    # init model_retrieval;
+    init drone;\n\
+\    int pw0 = [0:1:10];
     int pw1 = [2:1:10];
     int pw2 = [3:1:10];
     int pw3 = [4:1:10];
@@ -870,9 +871,6 @@ let print_bigraph_sim =
         selecting_concurrent_right = {conc_R}
 
               ];
-            preds = {failure, no_failure, empty_intention};
-  
-  
   "
 
 let fold_preds_name str ch =
