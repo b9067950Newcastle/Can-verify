@@ -8,8 +8,8 @@ type plan_body =
   | Empty
 
 type belief = Belief of string * string * string
-type desire = Desire of string
-type plan = Plan of string * cond * plan_body
+type desire = Desire of string * string
+type plan = Plan of string * string * cond * plan_body
 type set = Add of belief array | Del of belief array
 type action = Action of string * cond * set * string * string * set * string * string
 

@@ -86,7 +86,7 @@ val transform_desire : Syntax.desire array -> string array
 val belief : string -> string -> string -> string -> string
 (** Helper function for a [fold_left] that concatenate the beliefs with the good typo.*)
 
-val desire : string -> string -> string
+val desire : string -> string -> string -> string
 (** Helper function for a [fold_left] that concatenate the desires with the good typo.*)
 
 val str_build_belief : Syntax.belief array -> string
@@ -105,7 +105,7 @@ val find_i : string list array -> string -> int -> int option
 (** [find_i array elt n] is used on [array] to find if [elt] is inside [array]. Returns either
  the index if present or [None] if not.*)
 
-val plan_array_build : string -> Syntax.cond -> string -> unit
+val plan_array_build : string -> string -> Syntax.cond -> string -> unit
 (** Contructs the ref {!val:plans} with BigraphER code.*)
 
 val action_str_build : string -> string -> string -> string -> string -> string -> string -> string -> unit

@@ -19,8 +19,8 @@ let rec c_plan plans =
   match plans with
   | h :: t -> (
       match h with
-      | Plan (event, c, pb) ->
-          plan_array_build event c (c_pb pb event);
+      | Plan (plan_num, event, c, pb) ->
+          plan_array_build plan_num event c (c_pb pb event);
           c_plan t)
   | [] -> ()
 
@@ -39,7 +39,7 @@ let rec c_line line =
       c_line l1;
       c_line l2
   | Beliefs b -> strs_build_belief b
-  | Desires d -> str_build_desire d
+  | Desires d-> str_build_desire d
   | Plans p ->
       let plans_list = Array.to_list p in
       c_plan plans_list
