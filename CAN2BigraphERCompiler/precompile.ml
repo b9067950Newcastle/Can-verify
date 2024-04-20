@@ -27,7 +27,8 @@ let rec c_plan plans =
   match plans with
   | h :: t -> (
       match h with
-      | Plan (event, c, pb) ->
+      | Plan (plan_num, event, c, pb) ->
+          a_type plan_num;
           e_type event;
           c_cond c;
           c_pb pb;
@@ -83,6 +84,6 @@ let rec c_line line =
         | [] -> ()
       in
       scan b
-  | Desires d -> Array.iter (fun x -> match x with Desire des -> e_type des) d
+  | Desires d -> Array.iter (fun x -> match x with Desire (des, des_num) -> e_type des; a_type des_num) d
 
 let c_program program = c_line program

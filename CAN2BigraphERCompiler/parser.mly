@@ -34,15 +34,15 @@ belief:
 
 desire:
     | desire COMMA desire { Array.append $1 $3 }
-    | STRING { Array.make 1 (Desire($1)) }
+    | STRING COLON STRING{ Array.make 1 (Desire($1, $3)) }
 
 plan:
     | plan_t { $1 }
     | plan_t plan { Array.append $1 $2 }
 
 plan_t:
-    | STRING COLON cond ARROW pb STOP { Array.make 1 (Plan($1, $3, $5)) }
-    | STRING COLON cond ARROW STOP { Array.make 1 (Plan($1, $3, Empty)) }
+    | STRING COLON STRING COLON cond ARROW pb STOP { Array.make 1 (Plan($1, $3, $5, $7)) }
+    | STRING COLON STRING COLON cond ARROW STOP { Array.make 1 (Plan($1, $3, $5, Empty)) }
 
 pb:
     | pb SEMI_COL pb { Seq_PB($1, $3) }
