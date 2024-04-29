@@ -6,6 +6,7 @@ rule token = parse
 | '\n' { Lexing.new_line lexbuf; token lexbuf }
 | "//"[^'\n']* { token lexbuf }
 | " " { token lexbuf }
+| "that" { THAT }
 | "In" { IN }
 | "all" { ALL }
 | "some" { SOME }
@@ -17,6 +18,11 @@ rule token = parse
 | "possible" { POSSIBLE }
 | "holds"'.'? { HOLDS }
 | "hold"'.'? { HOLD }
+| "What" { WHAT }
+| "is" { IS }
+| "the minimum" { MINIMUM }
+| "the maximum" { MAXIMUM }
+| "probability" { PROBABILITY }
 | ['A'-'z' '0'-'9' '_' '-']['A'-'z' '0'-'9' '_' '-']* as str { BEL_NAME str }
 | eof { EOF }
 | _ { raise Error }

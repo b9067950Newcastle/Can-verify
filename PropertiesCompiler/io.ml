@@ -1,9 +1,9 @@
 let built_in_prop =
   "\n\n\
-   A [ F (\"no_failure\"&(X \"empty_intention\")) ];\n\
-  \ E [ F (\"no_failure\"&(X \"empty_intention\")) ];\n\
-  \ A [ F (\"failure\"&(X \"empty_intention\")) ];\n\
-  \ E [ F (\"failure\"&(X \"empty_intention\")) ];\n"
+   Pmin =? [ F (\"no_failure\"&(X \"empty_intention\")) ];\n\
+  \ Pmax =? [ F (\"no_failure\"&(X \"empty_intention\")) ];\n\
+  \ Pmin =? [ F (\"failure\"&(X \"empty_intention\")) ];\n\
+  \ Pmax =? [ F (\"failure\"&(X \"empty_intention\")) ];\n"
 
 let read_file_to_string str =
   let rec read_stream stream =
