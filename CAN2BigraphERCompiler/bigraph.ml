@@ -251,7 +251,7 @@ ctrl Revise = 0;
 
 # stochastic actions
 ctrl Effect = 0;
-atomic fun ctrl EffWeight(n) = 0;
+atomic fun ctrl EffectWeight(n) = 0;
 
 
 
@@ -395,7 +395,7 @@ react act_check =
 # action execution is extended to model the stochastic effects of action
 fun react act_T(n) =
      Beliefs.id
-  || Reduce.Act.(id | Effect.(Revise.id | EffWeight(n)) | Check.T)
+  || Reduce.Act.(id | Effect.(Revise.id | EffectWeight(n)) | Check.T)
   -[n]->
      Beliefs.(id | Revise.id)
   || Nil
@@ -698,14 +698,15 @@ react intention_done_F =
 
 react intention_done_succ =
    Intent.(Reduce.Nil | id) -[1]-> 1@[];
-   "
 
+
+big failure = Intent.(ReduceF | id);
+big no_failure = Intent.(Nil | id);
+big empty_intention = Intentions.1;
+
+   "
 let print_bigraph_sim =
-  "    # init model_patrolling;
-    # init model_concurrency;
-    # init model_retrieval;
-    init drone;\n\
-\    int pw0 = [0:1:10];
+  "  int pw0 = [0:1:10];
     int pw1 = [2:1:10];
     int pw2 = [3:1:10];
     int pw3 = [4:1:10];
@@ -730,7 +731,8 @@ let print_bigraph_sim =
     # init model_patrolling;
     # init model_concurrency;
     # init model_retrieval;
-      init drone;
+      init model;
+
 
 
     rules = [
@@ -748,16 +750,16 @@ let print_bigraph_sim =
 
             # epistemic belief entialment
             ( 
-            comparator_atoms_T_0(n,pw0),
-            comparator_atoms_T_1(n,pw1),
-            comparator_atoms_T_2(n,pw2),
-            comparator_atoms_T_3(n,pw3),
-            comparator_atoms_T_4(n,pw4),
-            comparator_atoms_T_5(n,pw5),
-            comparator_atoms_T_6(n,pw6),
-            comparator_atoms_T_7(n,pw7),
-            comparator_atoms_T_8(n,pw8),
-            comparator_atoms_T_9(n,pw9)
+            comparator_atoms_T_0(vars,pw0),
+            comparator_atoms_T_1(vars,pw1),
+            comparator_atoms_T_2(vars,pw2),
+            comparator_atoms_T_3(vars,pw3),
+            comparator_atoms_T_4(vars,pw4),
+            comparator_atoms_T_5(vars,pw5),
+            comparator_atoms_T_6(vars,pw6),
+            comparator_atoms_T_7(vars,pw7),
+            comparator_atoms_T_8(vars,pw8),
+            comparator_atoms_T_9(vars,pw9)
             ),
 
             (
@@ -771,8 +773,8 @@ let print_bigraph_sim =
             # epistemic belief revision
 
             (
-            revise_pw(n,r1,r2),
-            revise_nw(n,r1,r2),    
+            revise_pw(vars,r1,r2),
+            revise_nw(vars,r1,r2),    
             revise_end
             ),       
 
