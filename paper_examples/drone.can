@@ -1,0 +1,8 @@
+// Initial belief bases
+1. flood: <4, 2>, report : <0,0>
+// External events
+event1 : 1
+// Plan library
+1 : event1 : flood <- report_flood.
+// Actions description
+report_flood : flood <- < report: {3, 7} >, < report: {0, 3}>
