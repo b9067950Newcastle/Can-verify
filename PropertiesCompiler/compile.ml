@@ -1,7 +1,7 @@
 open Syntax
 
 let preds = ref [||]
-let c_quantity q = match q with All -> "Pmin" | Som -> "Pmax"
+let c_quantity q = match q with Min -> "Pmin" | Max -> "Pmax"
 
 let fold_bel str ch =
   if String.equal str "" then Printf.sprintf "predicate_%s" ch
