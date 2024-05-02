@@ -7,19 +7,11 @@ rule token = parse
 | "//"[^'\n']* { token lexbuf }
 | " " { token lexbuf }
 | "that" { THAT }
-| "In" { IN }
-| "all" { ALL }
-| "some" { SOME }
-| "executions," { EXECUTIONS }
-| "eventually" { EVENTUALLY }
 | "the belief" { THE_BELIEF }
-| "the beliefs" { THE_BELIEFS }
-| '(' { LB } | ')' { RB } | ',' { COMMA }
-| "possible" { POSSIBLE }
 | "holds"'.'? { HOLDS }
-| "hold"'.'? { HOLD }
 | "What" { WHAT }
 | "is" { IS }
+| "eventually" { EVENTUALLY }
 | "the minimum" { MINIMUM }
 | "the maximum" { MAXIMUM }
 | "probability" { PROBABILITY }
