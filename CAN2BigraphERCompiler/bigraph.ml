@@ -273,6 +273,142 @@ atomic fun ctrl EffectWeight(n) = 0;
 
 
 #   int pw0 = [1:1:10];
+fun react truth_atom_T_0(atom,pw0) =
+       B(atom).(Pw(pw0) | Nw(0) | id)
+    -[1]-> 
+       B(atom).(Pw(pw0) | Nw(0) | T | id)
+       if !T in param;
+
+#   int pw1 = [2:1:10];
+fun react truth_atom_T_1(atom,pw1) =
+       B(atom).(Pw(pw1) | Nw(1) | id)
+    -[1]-> 
+       B(atom).(Pw(pw1) | Nw(1) | T | id)
+       if !T in param;
+
+#   int pw2 = [3:1:10];
+fun react truth_atom_T_2(atom,pw2) =
+       B(atom).(Pw(pw2) | Nw(2) | id)
+    -[1]-> 
+       B(atom).(Pw(pw2) | Nw(2) | T | id)
+       if !T in param;
+
+#   int pw3= [4:1:10];
+fun react truth_atom_T_3(atom,pw3) =
+       B(atom).(Pw(pw3) | Nw(3) | id)
+    -[1]-> 
+       B(atom).(Pw(pw3) | Nw(3) | T | id)
+       if !T in param;
+
+#   int pw4= [5:1:10];
+fun react truth_atom_T_4(atom,pw4) =
+       B(atom).(Pw(pw4) | Nw(4) | id)
+    -[1]-> 
+       B(atom).(Pw(pw4) | Nw(4) | T | id)
+       if !T in param;
+
+#   int pw5= [6:1:10];
+fun react truth_atom_T_5(atom,pw5) =
+       B(atom).(Pw(pw5) | Nw(5) | id)
+    -[1]-> 
+       B(atom).(Pw(pw5) | Nw(5) | T | id)
+       if !T in param;
+
+#   int pw6= [7:1:10];
+fun react truth_atom_T_6(atom,pw6) =
+       B(atom).(Pw(pw6) | Nw(6) | id)
+    -[1]-> 
+       B(atom).(Pw(pw6) | Nw(6) | T | id)
+       if !T in param;
+
+#   int pw7= [8:1:10];
+fun react truth_atom_T_7(atom,pw7) =
+       B(atom).(Pw(pw7) | Nw(7) | id)
+    -[1]-> 
+       B(atom).(Pw(pw7) | Nw(7) | T | id)
+       if !T in param;
+
+#   int pw8= [9:1:10];
+fun react truth_atom_T_8(atom,pw8) =
+       B(atom).(Pw(pw8) | Nw(8) | id)
+    -[1]-> 
+       B(atom).(Pw(pw8) | Nw(8) | T | id)
+       if !T in param;
+
+#   int pw9 = 10;
+fun react truth_atom_T_9(atom,pw9) =
+       B(atom).(Pw(pw9) | Nw(9) | id)
+    -[1]-> 
+       B(atom).(Pw(pw9) | Nw(9) | T | id)
+       if !T in param;
+
+
+
+
+
+#   int nw0 = [0:1:10];
+fun react false_atom_T_0(atom,nw0) =
+       B(atom).(Pw(0) | Nw(nw0) | T | id)
+    -[1]-> 
+       B(atom).(Pw(0) | Nw(nw0) | id);
+
+#   int nw1 = [1:1:10];
+fun react false_atom_T_1(atom,nw1) =
+       B(atom).(Pw(1) | Nw(nw1) | T | id)
+    -[1]-> 
+       B(atom).(Pw(1) | Nw(nw1) | id);
+
+#   int nw2 = [2:1:10];
+fun react false_atom_T_2(atom,nw2) =
+       B(atom).(Pw(2) | Nw(nw2) | T | id)
+    -[1]-> 
+       B(atom).(Pw(2) | Nw(nw2) | id);
+
+#   int nw3= [3:1:10];
+fun react false_atom_T_3(atom,nw3) =
+       B(atom).(Pw(3) | Nw(nw3) | T | id)
+    -[1]-> 
+       B(atom).(Pw(3) | Nw(nw3) | id);
+
+#   int nw4= [4:1:10];
+fun react false_atom_T_4(atom,nw4) =
+       B(atom).(Pw(4) | Nw(nw4) | T | id)
+    -[1]-> 
+       B(atom).(Pw(4) | Nw(nw4) | id);
+
+#   int nw5= [5:1:10];
+fun react false_atom_T_5(atom,nw5) =
+       B(atom).(Pw(5) | Nw(nw5) | T | id)
+    -[1]-> 
+       B(atom).(Pw(5) | Nw(nw5) | id);
+
+#   int nw6= [6:1:10];
+fun react false_atom_T_6(atom,nw6) =
+       B(atom).(Pw(6) | Nw(nw6) | T | id)
+    -[1]-> 
+       B(atom).(Pw(6) | Nw(nw6) | id);
+
+#   int nw7= [7:1:10];
+fun react false_atom_T_7(atom,nw7) =
+       B(atom).(Pw(7) | Nw(nw7) | T | id)
+    -[1]-> 
+       B(atom).(Pw(7) | Nw(nw7) | id);
+
+#   int pw8= [8:1:10];
+fun react false_atom_T_8(atom,nw8) =
+       B(atom).(Pw(8) | Nw(nw8) | T | id)
+    -[1]-> 
+       B(atom).(Pw(8) | Nw(nw8) | id);
+
+#   int pw9 = [9:1:10];
+fun react false_atom_T_9(atom,nw9) =
+       B(atom).(Pw(9) | Nw(nw9) | T | id)
+    -[1]-> 
+       B(atom).(Pw(9) | Nw(nw9) | id);
+
+
+
+#   int pw0 = [1:1:10];
 fun react comparator_atoms_T_0(atom,pw0) =
        B(atom).(Pw(pw0) | Nw(0) | id)
     || Check.(B(atom).1 | id)
@@ -706,7 +842,7 @@ big empty_intention = Intentions.1;
 
    "
 let print_bigraph_sim =
-  "  int pw0 = [0:1:10];
+  "  int pw0 = [1:1:10];
     int pw1 = [2:1:10];
     int pw2 = [3:1:10];
     int pw3 = [4:1:10];
@@ -716,6 +852,17 @@ let print_bigraph_sim =
     int pw7 = [8:1:10];
     int pw8 = [9:1:10];
     int pw9 = 10;
+
+    int nw0 = [0:1:10];
+    int nw1 = [1:1:10];
+    int nw2 = [2:1:10];
+    int nw3 = [3:1:10];
+    int nw4 = [4:1:10];
+    int nw5 = [5:1:10];
+    int nw6 = [6:1:10];
+    int nw7 = [7:1:10];
+    int nw8 = [8:1:10];
+    int nw9 = [9:1:10];
 
     # ranges of 0 to 10 for positive and negative value for revision
     int r1 = [0:1:10];
@@ -747,6 +894,35 @@ let print_bigraph_sim =
 
             # Plan selection token housekeeping
             (reset_planset),
+
+
+
+            # constant belief true entailment
+
+            (
+            truth_atom_T_0(vars,pw0),
+            truth_atom_T_1(vars,pw1),
+            truth_atom_T_2(vars,pw2),
+            truth_atom_T_3(vars,pw3),
+            truth_atom_T_4(vars,pw4),
+            truth_atom_T_5(vars,pw5),
+            truth_atom_T_6(vars,pw6),
+            truth_atom_T_7(vars,pw7),
+            truth_atom_T_8(vars,pw8),
+            truth_atom_T_9(vars,pw9),
+            false_atom_T_0(vars,nw0),
+            false_atom_T_1(vars,nw1),
+            false_atom_T_2(vars,nw2),
+            false_atom_T_3(vars,nw3),
+            false_atom_T_4(vars,nw4),
+            false_atom_T_5(vars,nw5),
+            false_atom_T_6(vars,nw6),
+            false_atom_T_7(vars,nw7),
+            false_atom_T_8(vars,nw8),
+            false_atom_T_9(vars,nw9)
+
+            ),
+
 
             # epistemic belief entialment
             ( 
@@ -848,7 +1024,7 @@ let print_bigraph_sim =
              }
             ];
     actions = [
-        instrules = {try_succ_unique, init_plansets, goal_root_failure_transform, reset_planset, comparator_atoms_T_0, comparator_atoms_T_1, comparator_atoms_T_2, comparator_atoms_T_3, comparator_atoms_T_4, comparator_atoms_T_5, comparator_atoms_T_6, comparator_atoms_T_7, comparator_atoms_T_8, comparator_atoms_T_9, check_end_T, check_end_F, revise_pw, revise_nw, revise_end, reduce_event, act_check, select_plan_check, goal_check, act_F, select_plan_F, goal_suc, goal_fail, goal_init, conc_succ, goal_persist_nil, conc_nil_L, conc_nil_R, seq_succ, try_succ, goal_persist, conc_fail_L, conc_fail_R, seq_fail, try_failure, goal_reduce, reduce_seq, try_seq, intention_done_succ, intention_done_F},
+        instrules = {try_succ_unique, init_plansets, goal_root_failure_transform, reset_planset, truth_atom_T_0, truth_atom_T_1, truth_atom_T_2, truth_atom_T_3, truth_atom_T_4, truth_atom_T_5, truth_atom_T_6, truth_atom_T_7, truth_atom_T_8, truth_atom_T_9, false_atom_T_0, false_atom_T_1, false_atom_T_2, false_atom_T_3, false_atom_T_4, false_atom_T_5, false_atom_T_6, false_atom_T_7, false_atom_T_8, false_atom_T_9, comparator_atoms_T_0, comparator_atoms_T_1, comparator_atoms_T_2, comparator_atoms_T_3, comparator_atoms_T_4, comparator_atoms_T_5, comparator_atoms_T_6, comparator_atoms_T_7, comparator_atoms_T_8, comparator_atoms_T_9, check_end_T, check_end_F, revise_pw, revise_nw, revise_end, reduce_event, act_check, select_plan_check, goal_check, act_F, select_plan_F, goal_suc, goal_fail, goal_init, conc_succ, goal_persist_nil, conc_nil_L, conc_nil_R, seq_succ, try_succ, goal_persist, conc_fail_L, conc_fail_R, seq_fail, try_failure, goal_reduce, reduce_seq, try_seq, intention_done_succ, intention_done_F},
         executing_action = {act_T},
         selecting_event_1 = {a_event_1},
         selecting_event_2 = {a_event_2},
@@ -888,7 +1064,7 @@ let make_predicates () =
         Array.append names [| Printf.sprintf "predicate_%s" pred_name |]
       in
       let decl =
-        Printf.sprintf "Beliefs.(%s | id)"
+        Printf.sprintf "B(\"%s\").(T|id)"
           (Array.fold_left (fun acc el -> if acc = "" then el else acc ^ " | " ^ el) "" !preds.(i))
       in
       let decl = Printf.sprintf "big predicate_%s = %s;\n" pred_name decl in
