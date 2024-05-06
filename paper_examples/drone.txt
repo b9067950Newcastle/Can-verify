@@ -1,1 +1,2 @@
 What is the maximum probability that eventually the belief report holds
+What is the minimum probability that eventually the belief report holds
