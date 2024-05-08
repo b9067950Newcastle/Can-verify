@@ -4,21 +4,11 @@
 
 ## Description
 
+This project is developed based on Mengwei Xu's Can verigy tool. 
+
+https://zenodo.org/records/8282684
+
 The aim of this program is to streamlined the entire underlying process of formal modelling/encoding from BDI agents in CAN language to Bigraphs, model execution in BigraphER tool, and back-end model-checker with PRISM. It was developed by Thibault Rivoalen ([thibault.rivoalen@alumni.enac.fr](mailto:thibault.rivoalen@alumni.enac.fr)) for the University of Glasgow, UK. If you have any question installing it, please also send the email to corresponding author to mengwei.xu@manchester.ac.uk. 
-
-
---- 
-
-## Script
-
-We recommand building program in Ubuntu (which has been succesfully tested).
-
-We have provide a script ```ifm-artifact-install-and-run.sh``` that anyone can run to 1. install the dependencies automatically and 2. run the IFM2023 accepted paper examples automatically. 
-
-You may need to do ```chmod +x ifm-artifact-install-and-run.sh``` first.
-
-
-
 
 ---
 ## Quick Start
@@ -121,10 +111,13 @@ the current implementation support the input in ```prop.txt``` of the following
 1. In all possible executions, eventually the belief ```variable``` holds: *A [ F ("```variable```") ]*.
 2. In some executions, eventually the belief ```variable``` holds: *E [ F ("```variable```") ]*.
 
+1. What is the maximum probability that eventually the belief ```variable``` holds
+2. What is the minimum probability that eventually the belief ```variable``` holds
+
 For example, we can have:
 
-1. In all possible executions, eventually the belief F1_clean holds.
-2. In some executions, eventually the belief F1_clean holds.
+What is the maximum probability that eventually the belief report holds
+What is the minimum probability that eventually the belief report holds
 
 
 
@@ -134,35 +127,21 @@ For example, we can have:
 - the parse will complain if the exact wording is not followed.
 
 
-## Paper Examples
-As per our accepted IFM paper attached in the artifact submission, the examples used in the paper are included in the folder ./paper_examples. The following is the commentary:
-
-- **Listing_1-3.can** corresponds to the examples in Listing 1.3. CAN agent for concurrent sensing in UAVs.
-- **Listing_1-3-Corrected.can** corresponds to the improved design for Listing 1.3 where we replace the concurrenty program  **dust || photo** with **dust; photo**. 
-- **Listing_1-4.can** corresponds to the examples in Listing 1.4. CAN agent for two-storey building patrol robot.
-- **Listing_1-4.txt** corresponds to the belief-based property spefication for Listing 1.4. 
-
-
 ### run examples
-- for the exmaple in listing 1.3, please run the command
+The project provides a new example, drone.can and drone.txt. Examples are included in the folder ./paper_examples. 
 
-```./CAN-Verify -dynamic paper_examples/Listing_1-3.can```
-
-```./CAN-Verify -dynamic paper_examples/Listing_1-3-Corrected.can```
-
-- for the exmaple in listing 1.4, please run the command
+please run the command
 
 
-```./CAN-Verify -dynamic -p paper_examples/Listing_1-4.txt paper_examples/Listing_1-4.can```
-
+```./CAN-Verify -dynamic -p paper_examples/drone.txt paper_examples/drone.can```
 
 #### for a quick check
 
 - for the exmaple in listing 1.3, you should get the following
 
-> Model checking: A [ F ("no_failure"&(X "empty_intention")) ] ... Result: false
+> Model checking: Pmin=? [ F ("no_failure"&(X "empty_intention")) ] ... Result: 1.0
 
-there means that it is not always the case the task of sensing is achieved eventually.
+there means that it is always the case the task of sensing is achieved eventually.
 
 > Model checking: E [ F ("failure"&(X "empty_intention")) ] ... Result: true
 
