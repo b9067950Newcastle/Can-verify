@@ -109,9 +109,6 @@ Run ```./CAN-Verify  [options] [-p prop.txt] <file.can>```
 
 the current implementation support the input in ```prop.txt``` of the following 
 
-1. In all possible executions, eventually the belief ```variable``` holds: *A [ F ("```variable```") ]*.
-2. In some executions, eventually the belief ```variable``` holds: *E [ F ("```variable```") ]*.
-
 1. What is the maximum probability that eventually the belief ```variable``` holds
 2. What is the minimum probability that eventually the belief ```variable``` holds
 
@@ -120,7 +117,19 @@ For example, we can have:
 What is the maximum probability that eventually the belief report holds
 What is the minimum probability that eventually the belief report holds
 
-
+### Agent attribute specification: ``` [.can] ```
+1. // Initial belief bases, there is no upper limit on the number of beliefs,
+2. 1. ```belief name variable``` : <```positive value variable```, ```negative value variable```>, ```belief name variable``` : <```positive value variable```, ```negative value variable```>, ...
+3. // External events, there is no upper limit on the number of event
+4. ```event_a name variable``` : 1, ```event_b name variable``` : 2, ```event_c name variable``` : 3, ...
+5. // Plan library, there is no upper limit on the number of plan.
+6. 1: ```plan variable``` <- ```plan body variable```
+7. 2：```plan variable``` <- ```plan body variable```
+8. ...
+9. // Actions description, there is no upper limit on the number of event
+10. ```action name variable``` : ```cond variable``` <- < ```belief name variable``` : {```positive value variable```, ```positive EffectWeight variable```}>, < ```belief name variable``` : {```negative value variable```, ```negative EffectWeight variable```}>
+11. ```action name variable``` : ```cond variable``` <- < ```belief name variable``` : {```positive value variable```, ```positive EffectWeight variable```}>, < ```belief name variable``` : {```negative value variable```, ```negative EffectWeight variable```}>
+12. ...
 
 ##### Property specification note
 - the generic properties are by default included to check determining if for some/all executions an event finishes with failure or success.
