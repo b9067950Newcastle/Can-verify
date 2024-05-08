@@ -16,6 +16,7 @@ The aim of this program is to streamlined the entire underlying process of forma
 
 We recommand building program in Ubuntu (which has been succesfully tested).
 
+glibc version requires 2.34 or above
 
 We have pre-combined the main binary and dependency binary in folder ```./bins``` required whereever we can to run the tool.
 
@@ -137,35 +138,35 @@ please run the command
 
 #### for a quick check
 
-- for the exmaple in listing 1.3, you should get the following
+- for the exmaple in drone, you should get the following
 
 > Model checking: Pmin=? [ F ("no_failure"&(X "empty_intention")) ] ... Result: 1.0
 
-there means that it is always the case the task of sensing is achieved eventually.
+> Model checking: Pmax=? [ F ("no_failure"&(X "empty_intention")) ] ... Result: 1.0
 
-> Model checking: E [ F ("failure"&(X "empty_intention")) ] ... Result: true
+there mean that it is always the case the task of sensing is achieved eventually.
 
-there means that there indeed exists a case that the task of sensing is failed eventually.
+> Model checking: Pmin=? [ F ("failure"&(X "empty_intention")) ] ... Result: 0.0
 
-
-- if you run the exmaple in **Listing_1-3-Corrected.can**, you should get the following
-
-> Model checking: A [ F ("no_failure"&(X "empty_intention")) ] ... Result: True
-
-there means that it is always the case the task of sensing is achieved eventually.
-
-
-> Model checking: E [ F ("failure"&(X "empty_intention")) ] ... Result: false
+> Model checking: Pmax=? [ F ("failure"&(X "empty_intention")) ] ... Result: 0.0
 
 there means that there never exists the case the task of sensing is failed eventually.
 
-- for the exmaple in **Listing_1-4.can**, you should get the following
+> Model checking: Pmax=? [ F ("predicate_report") ]
 
-> Modelc checking: A [ F ("predicate_F1_clean") ] ... Result: true
+This sentence is translated from What is the maximum probability that eventually the belief report holds
 
-there means that it is always the case that the predicate of F1_clean holds eventually. 
+> Result 0.7
 
+This means that the maximum probability that eventually the belief report holds is 70%
 
+> Model checking: Pmin=? [ F ("predicate_report") ]
+
+This sentence is translated from What is the minimum probability that eventually the belief report holds
+
+> Result 0.7
+
+This means that the minimum probability that eventually the belief report holds is 70%
 
 
 ### Built with Docker
